@@ -10,8 +10,7 @@ $(document).ready(function() {
  */
 function initializePage() {
 	$('.project a').click(addProjectDetails);
-
-	// $('#colorBtn').click(randomizeColors);
+	$('#colorBtn').click(randomizeColors);
 }
 
 /*
@@ -27,4 +26,27 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+
+	// call the AJAX endpoint with customized URL
+	var getURL = "http://localhost:3000/project/"+idNumber;
+	$.get(getURL, callBack);
+	console.log("Calling: " + getURL);
+}
+
+/*
+ * Call back function
+ */
+function callBack(result) {
+	// Debug message.
+	console.log(result);
+
+	// Get details.
+	var callBackHTML = '<div><h5>' +
+		result['title'] + '</h5><p><small>' +
+		result['date'] + '</small></p><img src=' +
+		result['image'] + ' class="detailsImage">' +
+		result['summary'];
+
+	// Insert project details.
+	$("#project"+result['id']+" .details").html(callBackHTML);
 }
