@@ -28,7 +28,7 @@ function addProjectDetails(e) {
 	console.log("User clicked on project " + idNumber);
 
 	// call the AJAX endpoint with customized URL
-	var getURL = "http://localhost:3000/project/"+idNumber;
+	var getURL = "/project/"+idNumber;
 	$.get(getURL, callBack);
 	console.log("Calling: " + getURL);
 }
